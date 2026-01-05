@@ -36,27 +36,9 @@
             padding: 40px 10px;
         }
 
-<<<<<<< HEAD
         #snow-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 9999; }
         body::before { content: ""; position: fixed; inset: 0; background: rgba(0, 0, 0, 0.5); z-index: 0; }
 
-=======
-        #snow-canvas {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; 
-            z-index: 9999; 
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 0;
-        }
-
->>>>>>> 3e106526589790663e0723f772d597c4ab3b358e
         .animated-border-box {
             position: relative; z-index: 10; padding: 2px; border-radius: 42px; overflow: hidden; display: flex; width: 100%; max-width: 440px;
         }
@@ -153,10 +135,7 @@
                     </ul>
                 </div>
             </div>
-<<<<<<< HEAD
             
-=======
->>>>>>> 3e106526589790663e0723f772d597c4ab3b358e
             <div class="bg-black/30 rounded-2xl p-3 border border-white/5">
                 <div class="flex items-center gap-3">
                     <img src="cover.jpg" id="album-art" class="w-10 h-10 rounded-full border border-pink-500/20 object-cover pointer-events-none" alt="Art">
@@ -175,10 +154,7 @@
                 </div>
                 <audio id="main-audio"></audio>
             </div>
-<<<<<<< HEAD
 
-=======
->>>>>>> 3e106526589790663e0723f772d597c4ab3b358e
             <div class="grid grid-cols-5 gap-2 text-center">
                 <a href="https://www.facebook.com/Saonumi31/" target="_blank" class="contact-btn flex items-center justify-center py-3 bg-white/5 rounded-xl border border-white/5 group shadow-sm">
                     <i data-lucide="facebook" class="w-4 h-4 text-zinc-400 group-hover:text-pink-400"></i>
@@ -202,7 +178,6 @@
     </div>
 
     <script>
-<<<<<<< HEAD
         document.addEventListener('keydown', e => {
             if (e.key === 'F12' || (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'C' || e.key === 'J')) || (e.ctrlKey && e.key === 'u')) {
                 e.preventDefault();
@@ -213,8 +188,6 @@
             img.addEventListener('dragstart', e => e.preventDefault());
         });
 
-=======
->>>>>>> 3e106526589790663e0723f772d597c4ab3b358e
         lucide.createIcons();
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
@@ -247,10 +220,7 @@
             requestAnimationFrame(animate);
         }
         animate();
-<<<<<<< HEAD
 
-=======
->>>>>>> 3e106526589790663e0723f772d597c4ab3b358e
         const playlist = [
             { src: 'em.mp3', cover: 'cover.jpg', title: 'Em', artist: 'Binz' },
             { src: 'golden_hour.mp3', cover: 'cover2.jpg', title: 'Golden Hour', artist: 'JVKE' },
