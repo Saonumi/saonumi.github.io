@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saonumi | AI Engineer</title>
+    
+    <!-- DÒNG MỚI: Thêm icon cho tab trình duyệt -->
+    <link rel="icon" type="image/png" href="favicon.png?v=2">
+    <link rel="apple-touch-icon" href="favicon.png?v=2">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.png?v=2">
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: url('bg.png') no-repeat center center fixed;
+            background-size: cover;
+            color: #e4e4e7;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        #snow-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        body::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        /* Viền chạy sáng hồng */
+        .animated-border-box {
+            position: relative;
+            z-index: 10;
+            padding: 2px;
+            border-radius: 42px;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .animated-border-box::before {
+            content: "";
+            position: absolute;
+            width: 150%; height: 150%;
+            background: conic-gradient(transparent, transparent, transparent, #f472b6);
+            animation: rotate-border 4s linear infinite;
+            z-index: -1;
+            top: -25%; left: -25%;
+        }
+
+        @keyframes rotate-border {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .glass-container {
+            background: rgba(15, 15, 20, 0.85);
+            backdrop-filter: blur(50px);
+            border-radius: 40px;
+            width: 440px;
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+
+        .terminal-header {
+            background: rgba(244, 114, 182, 0.1);
+            border-radius: 12px 12px 0 0;
+            padding: 6px 12px;
+            border-bottom: 1px solid rgba(244, 114, 182, 0.1);
+        }
+
+        input[type="range"] {
+            appearance: none;
+            background: rgba(255, 255, 255, 0.1);
+            height: 3px;
+            border-radius: 2px;
+            cursor: pointer;
+        }
+        input[type="range"]::-webkit-slider-thumb {
+            appearance: none;
+            width: 8px; height: 8px;
+            background: #f472b6;
+            border-radius: 50%;
+        }
+
+        .mono { font-family: 'Fira Code', monospace; }
+        .rotating { animation: spin 10s linear infinite; }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        
+        .contact-btn:hover {
+            background: rgba(244, 114, 182, 0.15);
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body onclick="initAudio()">
+
+    <canvas id="snow-canvas"></canvas>
+
+    <div class="animated-border-box shadow-2xl">
+        <div class="glass-container">
+            
+            <!-- Profile -->
+            <div class="flex flex-col items-center text-center">
+                <div class="relative mb-3">
+                    <div class="absolute inset-0 bg-pink-500 rounded-full blur-2xl opacity-10"></div>
+                    <img src="avatar.jpg" class="w-24 h-24 rounded-full border-2 border-pink-400/30 object-cover p-1 bg-zinc-900" alt="Saonumi">
+                    <div class="absolute bottom-1 right-1 w-5 h-5 bg-green-500 border-[3px] border-zinc-950 rounded-full"></div>
+                </div>
+                <h1 class="text-2xl font-bold text-white tracking-tight">Nguyễn Ngọc Sáng</h1>
+                <p class="text-pink-300 text-[10px] font-bold uppercase tracking-[4px] mt-1">AI Intern @ Saonumi</p>
+            </div>
+
+            <!-- Python Bio Section -->
+            <div class="bg-black/40 rounded-2xl overflow-hidden border border-white/5">
+                <div class="terminal-header flex gap-1.5">
+                    <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+                    <div class="w-2 h-2 rounded-full bg-yellow-500/50"></div>
+                    <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+                    <span class="text-[8px] text-pink-300/50 ml-2 mono uppercase tracking-widest text-[7px]">bio.py</span>
+                </div>
+                <div class="p-4 mono text-[10px] leading-relaxed">
+                    <p><span class="text-pink-400">class</span> <span class="text-blue-300">Saonumi</span>:</p>
+                    <p class="pl-4"><span class="text-pink-400">def</span> <span class="text-blue-300">__init__</span>(self):</p>
+                    <p class="pl-8 text-zinc-400">self.role = <span class="text-green-300">"AI Intern"</span></p>
+                    <p class="pl-8 text-zinc-400">self.skills = [<span class="text-green-300">"ML", "DL", "CV","NLP"</span>]</p>
+                    <p class="pl-8 text-zinc-400">self.motto = <span class="text-green-300">"AI for Future"</span></p>
+                    <p class="pl-4 mt-2"><span class="text-pink-400">def</span> <span class="text-blue-300">say_hi</span>(self):</p>
+                    <p class="pl-8 text-pink-300">print(<span class="text-green-300">"Welcome to my website..."</span>)</p>
+                </div>
+            </div>
+
+            <!-- Tech & Status Section -->
+            <div class="grid grid-cols-2 gap-4">
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
+                    <h3 class="text-[9px] font-bold text-pink-300 uppercase mb-3 flex items-center gap-2">
+                        <i data-lucide="code-2" class="w-3 h-3"></i> Tech Skills
+                    </h3>
+                    <ul class="text-[11px] space-y-2 text-zinc-300">
+                        <li>▹ Python / C++</li>
+                        <li>▹ Machine Learning</li>
+                        <li>▹ Deep Learning</li>
+                        <li>▹ Computer Vision</li>
+                        <li>▹ NLP</li>
+                    </ul>
+                </div>
+                <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
+                    <h3 class="text-[9px] font-bold text-pink-300 uppercase mb-3 flex items-center gap-2">
+                        <i data-lucide="award" class="w-3 h-3"></i> Status
+                    </h3>
+                    <ul class="text-[11px] space-y-2 text-zinc-300">
+                        <li class="font-semibold text-white">▹ Top 9 Olympic 2025 FPT</li>
+                        <li class="font-semibold text-white">▹ SAP-Lab FPT</li>
+                        <li class="font-semibold text-white">▹ KS57-Digital Transformation Engineer</li>
+                        <li class="italic text-zinc-500">▹ Loading...</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Music Player -->
+            <div class="bg-black/30 rounded-2xl p-3 border border-white/5">
+                <div class="flex items-center gap-3">
+                    <img src="cover.jpg" id="album-art" class="w-10 h-10 rounded-full border border-pink-500/20 object-cover" alt="Art">
+                    <div class="flex-1 min-w-0">
+                        <div class="flex justify-between items-center mb-0.5">
+                            <h4 id="song-title" class="text-white font-bold text-[10px] truncate uppercase tracking-tighter">Đang tải...</h4>
+                            <div class="flex gap-3">
+                                <button onclick="prevSong()"><i data-lucide="skip-back" class="w-3 h-3 text-zinc-500 hover:text-pink-400"></i></button>
+                                <button onclick="togglePlay()" id="play-btn-wrapper">
+                                    <i data-lucide="play" class="w-3 h-3 text-pink-400 fill-current"></i>
+                                </button>
+                                <button onclick="nextSong()"><i data-lucide="skip-forward" class="w-3 h-3 text-zinc-500 hover:text-pink-400"></i></button>
+                            </div>
+                        </div>
+                        <p id="song-artist" class="text-zinc-500 text-[9px] truncate mb-1.5">Nghệ sĩ</p>
+                        <input type="range" id="seek-bar" value="0" class="w-full">
+                    </div>
+                </div>
+                <audio id="main-audio"></audio>
+            </div>
+
+            <!-- Social Links -->
+            <div class="grid grid-cols-5 gap-2 text-center">
+                <a href="https://www.facebook.com/Saonumi31/" target="_blank" class="contact-btn flex items-center justify-center py-3 bg-white/5 rounded-xl border border-white/5 group shadow-sm">
+                    <i data-lucide="facebook" class="w-4 h-4 text-zinc-400 group-hover:text-pink-400"></i>
+                </a>
+                <a href="https://www.instagram.com/saonumi/" target="_blank" class="contact-btn flex items-center justify-center py-3 bg-white/5 rounded-xl border border-white/5 group shadow-sm">
+                    <i data-lucide="instagram" class="w-4 h-4 text-zinc-400 group-hover:text-pink-400"></i>
+                </a>
+                <a href="https://www.linkedin.com/in/saonumi/" target="_blank" class="contact-btn flex items-center justify-center py-3 bg-white/5 rounded-xl border border-white/5 group shadow-sm">
+                    <i data-lucide="linkedin" class="w-4 h-4 text-zinc-400 group-hover:text-pink-400"></i>
+                </a>
+                <a href="https://github.com/Saonumi" target="_blank" class="contact-btn flex items-center justify-center py-3 bg-white/5 rounded-xl border border-white/5 group shadow-sm">
+                    <i data-lucide="github" class="w-4 h-4 text-zinc-400 group-hover:text-pink-400"></i>
+                </a>
+                <a href="mailto:sang3172005@gmail.com" class="contact-btn flex items-center justify-center py-3 bg-white/5 rounded-xl border border-white/5 group shadow-sm">
+                    <i data-lucide="mail" class="w-4 h-4 text-zinc-400 group-hover:text-pink-400"></i>
+                </a>
+            </div>
+
+            <p class="text-center text-[8px] text-zinc-600 uppercase tracking-[4px] mono">
+                © 2026 saonumi.ai.fpt
+            </p>
+        </div>
+    </div>
+
+    <script>
+        lucide.createIcons();
+
+        const canvas = document.getElementById('snow-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+        function resize() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resize); resize();
+        class Particle {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedY = Math.random() * 0.8 + 0.3;
+                this.speedX = Math.random() * 0.4 - 0.2;
+                this.opacity = Math.random() * 0.5 + 0.2;
+            }
+            update() {
+                this.y += this.speedY; this.x += this.speedX;
+                if (this.y > canvas.height) this.y = -10;
+            }
+            draw() {
+                ctx.fillStyle = `rgba(255, 255, 255, ${this.opacity})`;
+                ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill();
+            }
+        }
+        for (let i = 0; i < 80; i++) particles.push(new Particle());
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => { p.update(); p.draw(); });
+            requestAnimationFrame(animate);
+        }
+        animate();
+
+        // 2. LOGIC PHÁT NHẠC
+        const playlist = [
+            { src: 'em.mp3', cover: 'cover.jpg', title: 'Em', artist: 'Binz' },
+            { src: 'golden_hour.mp3', cover: 'cover2.jpg', title: 'Golden Hour', artist: 'JVKE' },
+            { src: 'anhdaonhon.mp3', cover: 'cover3.jpg', title: 'Anh Đã Ổn Hơn', artist: 'MCK' },
+            { src: 'neulucdo.mp3', cover: 'cover4.jpg', title: 'Nếu Lúc Đó', artist: 'tlinh,2pillz' },
+        ];
+        let currentIndex = 0;
+        const audio = document.getElementById('main-audio');
+        const seekBar = document.getElementById('seek-bar');
+        const albumArt = document.getElementById('album-art');
+        const songTitle = document.getElementById('song-title');
+        const songArtist = document.getElementById('song-artist');
+        const playBtnWrapper = document.getElementById('play-btn-wrapper');
+
+        function loadSong(index) {
+            const song = playlist[index];
+            audio.src = song.src;
+            albumArt.src = song.cover;
+            songTitle.innerText = song.title;
+            songArtist.innerText = song.artist;
+        }
+
+        function updatePlayIcon(iconName) {
+            playBtnWrapper.innerHTML = `<i data-lucide="${iconName}" class="w-3 h-3 text-pink-400 fill-current"></i>`;
+            lucide.createIcons();
+        }
+
+        function togglePlay() {
+            if (audio.paused) {
+                audio.play();
+                updatePlayIcon('pause');
+                albumArt.classList.add('rotating');
+            } else {
+                audio.pause();
+                updatePlayIcon('play');
+                albumArt.classList.remove('rotating');
+            }
+        }
+
+        function nextSong() {
+            currentIndex = (currentIndex + 1) % playlist.length;
+            loadSong(currentIndex);
+            audio.play();
+            updatePlayIcon('pause');
+            albumArt.classList.add('rotating');
+        }
+
+        function prevSong() {
+            currentIndex = (currentIndex - 1 + playlist.length) % playlist.length;
+            loadSong(currentIndex);
+            audio.play();
+            updatePlayIcon('pause');
+            albumArt.classList.add('rotating');
+        }
+
+        function initAudio() {
+            if (audio.src === "") {
+                loadSong(0);
+                audio.play();
+                updatePlayIcon('pause');
+                albumArt.classList.add('rotating');
+            }
+        }
+
+        audio.ontimeupdate = () => { seekBar.value = (audio.currentTime / audio.duration) * 100 || 0; };
+        seekBar.oninput = () => { audio.currentTime = (seekBar.value / 100) * audio.duration; };
+        audio.onended = nextSong;
+
+        loadSong(0);
+    </script>
+</body>
+</html>
