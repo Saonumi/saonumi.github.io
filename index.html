@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saonumi | AI Engineer</title>
     
-    <!-- DÒNG MỚI: Thêm icon cho tab trình duyệt -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="favicon.png?v=2">
     <link rel="apple-touch-icon" href="favicon.png?v=2">
     <link rel="shortcut icon" type="image/x-icon" href="favicon.png?v=2">
@@ -20,16 +20,18 @@
             background: url('bg.png') no-repeat center center fixed;
             background-size: cover;
             color: #e4e4e7;
-            height: 100vh;
-            overflow: hidden;
+            min-height: 100vh; /* Cho phép dài ra theo nội dung */
+            overflow-y: auto;  /* Cho phép lướt lên xuống */
             display: flex;
             justify-content: center;
             align-items: center;
             position: relative;
+            padding: 40px 10px; /* Khoảng cách trên dưới cho mobile */
         }
 
+        /* Giữ tuyết rơi cố định ở nền không trôi theo scroll */
         #snow-canvas {
-            position: absolute;
+            position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             pointer-events: none;
             z-index: 1;
@@ -37,7 +39,7 @@
 
         body::before {
             content: "";
-            position: absolute;
+            position: fixed; /* Lớp phủ cũng cố định */
             inset: 0;
             background: rgba(0, 0, 0, 0.5);
             z-index: 0;
@@ -51,16 +53,18 @@
             border-radius: 42px;
             overflow: hidden;
             display: flex;
+            width: 100%;
+            max-width: 440px; /* Rộng tối đa 440px, tự co lại trên mobile */
         }
 
         .animated-border-box::before {
             content: "";
             position: absolute;
-            width: 150%; height: 150%;
+            width: 200%; height: 200%;
             background: conic-gradient(transparent, transparent, transparent, #f472b6);
             animation: rotate-border 4s linear infinite;
             z-index: -1;
-            top: -25%; left: -25%;
+            top: -50%; left: -50%;
         }
 
         @keyframes rotate-border {
@@ -72,7 +76,7 @@
             background: rgba(15, 15, 20, 0.85);
             backdrop-filter: blur(50px);
             border-radius: 40px;
-            width: 440px;
+            width: 100%;
             padding: 2rem;
             display: flex;
             flex-direction: column;
@@ -108,6 +112,12 @@
             background: rgba(244, 114, 182, 0.15);
             transform: translateY(-2px);
         }
+
+        /* Tối ưu cho mobile rất nhỏ */
+        @media (max-width: 380px) {
+            .glass-container { padding: 1.5rem 1rem; }
+            .grid-cols-2 { grid-template-columns: 1fr; } /* Chuyển về 1 cột nếu màn hình quá bé */
+        }
     </style>
 </head>
 <body onclick="initAudio()">
@@ -120,15 +130,15 @@
             <!-- Profile -->
             <div class="flex flex-col items-center text-center">
                 <div class="relative mb-3">
-                    <div class="absolute inset-0 bg-pink-500 rounded-full blur-2xl opacity-10"></div>
+                    <div class="absolute inset-0 bg-pink-500 rounded-full blur-2xl opacity-15"></div>
                     <img src="avatar.jpg" class="w-24 h-24 rounded-full border-2 border-pink-400/30 object-cover p-1 bg-zinc-900" alt="Saonumi">
-                    <div class="absolute bottom-1 right-1 w-5 h-5 bg-green-500 border-[3px] border-zinc-950 rounded-full"></div>
+                    <div class="absolute bottom-1.5 right-1.5 w-5 h-5 bg-green-500 border-[3.5px] border-zinc-950 rounded-full"></div>
                 </div>
                 <h1 class="text-2xl font-bold text-white tracking-tight">Nguyễn Ngọc Sáng</h1>
                 <p class="text-pink-300 text-[10px] font-bold uppercase tracking-[4px] mt-1">AI Intern @ Saonumi</p>
             </div>
 
-            <!-- Python Bio Section -->
+            <!-- Python Bio -->
             <div class="bg-black/40 rounded-2xl overflow-hidden border border-white/5">
                 <div class="terminal-header flex gap-1.5">
                     <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
@@ -147,7 +157,7 @@
                 </div>
             </div>
 
-            <!-- Tech & Status Section -->
+            <!-- Tech & Status -->
             <div class="grid grid-cols-2 gap-4">
                 <div class="bg-white/5 p-4 rounded-2xl border border-white/5">
                     <h3 class="text-[9px] font-bold text-pink-300 uppercase mb-3 flex items-center gap-2">
@@ -166,7 +176,7 @@
                         <i data-lucide="award" class="w-3 h-3"></i> Status
                     </h3>
                     <ul class="text-[11px] space-y-2 text-zinc-300">
-                        <li class="font-semibold text-white">▹ Top 9 Olympic 2025 FPT</li>
+                        <li class="font-semibold text-white">▹ Top 9 Math Olympics FPT</li>
                         <li class="font-semibold text-white">▹ SAP-Lab FPT</li>
                         <li class="font-semibold text-white">▹ KS57-Digital Transformation Engineer</li>
                         <li class="italic text-zinc-500">▹ Loading...</li>
@@ -224,6 +234,7 @@
     <script>
         lucide.createIcons();
 
+        // 1. SNOW EFFECT (Cố định ở nền)
         const canvas = document.getElementById('snow-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
