@@ -1,1 +1,5 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" rx="16" fill="#051d4d"/><path d="M43 20H28c-14 0-14 12 0 12h8c14 0 14 12 0 12H21" fill="none" stroke="#34bfff" stroke-width="5" stroke-linecap="round"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Saonumi</title>
+  <rect width="64" height="64" rx="16" fill="#bf2358"/>
+  <path d="M44 19H27c-14 0-14 13 0 13h10c14 0 14 13 0 13H20" fill="none" stroke="#fff8f7" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

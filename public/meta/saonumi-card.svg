@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Saonumi · Nguyễn Ngọc Sáng</title>
+  <desc id="desc">Social preview for an AI research and engineering portfolio, with neural and audio motifs.</desc>
+  <defs>
+    <linearGradient id="paper" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#fff7f7"/>
+      <stop offset=".62" stop-color="#ffedf1"/>
+      <stop offset="1" stop-color="#f6eaf7"/>
+    </linearGradient>
+    <linearGradient id="pink" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#cf2a57"/>
+      <stop offset="1" stop-color="#9f1e6b"/>
+    </linearGradient>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feDropShadow dx="0" dy="16" stdDeviation="25" flood-color="#8b3152" flood-opacity=".16"/>
+    </filter>
+    <g id="spark" fill="none" stroke="#df8aa6" stroke-width="4" stroke-linecap="round">
+      <path d="M0-16V16M-16 0H16M-10-10 10 10M-10 10 10-10"/>
+    </g>
+  </defs>
+  <rect width="1200" height="630" fill="url(#paper)"/>
+  <path d="M0 540C150 469 221 545 342 630H0Z" fill="#f8dbe4"/>
+  <path d="M1142 0C1044 97 1115 141 1200 201V0Z" fill="#f3dbe9"/>
+  <path d="M0 0H1200" stroke="#c8275c" stroke-width="16"/>
+  <g font-family="'DejaVu Sans', 'Noto Sans', Arial, sans-serif">
+    <text x="80" y="96" fill="#b41b55" font-size="23" font-weight="700" letter-spacing="4">PORTFOLIO  /  AI RESEARCH</text>
+    <text x="73" y="244" fill="#37272e" font-size="100" font-weight="800" letter-spacing="-4">Saonumi</text>
+    <path d="M80 272H660" stroke="#eaa4b8" stroke-width="5" stroke-linecap="round"/>
+    <text x="80" y="334" fill="#552e3e" font-size="38" font-weight="700">Nguyễn Ngọc Sáng</text>
+    <text x="81" y="391" fill="#a72960" font-size="31" font-weight="700">AI Researcher / Engineer</text>
+  </g>
+  <g font-family="'DejaVu Sans', Arial, sans-serif" font-size="21" font-weight="700">
+    <rect x="80" y="450" width="178" height="54" rx="27" fill="#dceee7"/><text x="112" y="485" fill="#276959">NLP / RAG</text>
+    <rect x="273" y="450" width="184" height="54" rx="27" fill="#ffe2bd"/><text x="303" y="485" fill="#956329">SPEECH AI</text>
+    <rect x="472" y="450" width="202" height="54" rx="27" fill="#e8ddf6"/><text x="498" y="485" fill="#6b4e93">AI SECURITY</text>
+  </g>
+  <text x="82" y="573" font-family="'DejaVu Sans', Arial, sans-serif" font-size="24" font-weight="600" fill="#8b6e79">saonumi.io.vn</text>
+  <g transform="translate(934 312)" filter="url(#shadow)">
+    <circle r="220" fill="#f9d6e2"/>
+    <circle r="180" fill="#fff9f8"/>
+    <circle r="130" fill="url(#pink)"/>
+    <path d="M65-63H-29c-83 0-83 63 0 63h59c83 0 83 63 0 63h-95" fill="none" stroke="#fff8f7" stroke-width="26" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <g transform="translate(746 138) rotate(-10)" stroke="#ce5b83" stroke-width="4" fill="none" stroke-linecap="round">
+    <path d="M-55 0h16m8-11v22m12-33v66m12-49v10M8-29v58m13-13v26m12-11v22m11-39v14h16"/>
+  </g>
+  <g transform="translate(740 484)" fill="none" stroke="#9c72aa" stroke-width="3.5">
+    <path d="M-30 0 18-36 65-10 18 38-30 0M-30 0 65-10M18-36 18 38"/>
+    <g fill="#fff8f7"><circle cx="-30" r="8"/><circle cx="18" cy="-36" r="8"/><circle cx="65" cy="-10" r="8"/><circle cx="18" cy="38" r="8"/></g>
+  </g>
+  <use href="#spark" transform="translate(1102 92) scale(.9)"/>
+  <use href="#spark" transform="translate(731 342) scale(.65)"/>
+  <circle cx="1170" cy="480" r="7" fill="#e0a1b5"/>
+  <circle cx="710" cy="242" r="5" fill="#e0a1b5"/>
+</svg>
