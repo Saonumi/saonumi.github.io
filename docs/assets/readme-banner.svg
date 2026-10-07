@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">Saonumi · Nguyễn Ngọc Sáng</title>
+  <desc id="desc">Banner nhiều màu với hoa, lá, mạng neuron và sóng âm. AI Researcher / Engineer.</desc>
+  <defs>
+    <linearGradient id="bg" x2="1" y2="1">
+      <stop stop-color="#fff0d5"/>
+      <stop offset=".5" stop-color="#ffedf5"/>
+      <stop offset="1" stop-color="#e5f4f3"/>
+    </linearGradient>
+    <linearGradient id="ink" x2="1" y2=".2">
+      <stop stop-color="#b92066"/>
+      <stop offset="1" stop-color="#7756ae"/>
+    </linearGradient>
+    <g id="flower">
+      <g fill="#ed82ac">
+        <ellipse cy="-21" rx="11" ry="19"/>
+        <ellipse cy="-21" rx="11" ry="19" transform="rotate(60)"/>
+        <ellipse cy="-21" rx="11" ry="19" transform="rotate(120)"/>
+        <ellipse cy="-21" rx="11" ry="19" transform="rotate(180)"/>
+        <ellipse cy="-21" rx="11" ry="19" transform="rotate(240)"/>
+        <ellipse cy="-21" rx="11" ry="19" transform="rotate(300)"/>
+      </g>
+      <circle r="12" fill="#ffe293"/>
+      <circle cx="-3" cy="-2" r="2" fill="#c98246"/>
+      <circle cx="4" cy="3" r="2" fill="#c98246"/>
+    </g>
+    <g id="spark" fill="none" stroke="#be6b9d" stroke-width="3" stroke-linecap="round">
+      <path d="M0-13V13M-13 0H13M-8-8 8 8M-8 8 8-8"/>
+    </g>
+  </defs>
+  <rect width="1200" height="360" rx="30" fill="url(#bg)"/>
+  <path d="M22 292C105 238 86 114 190 66M1019 336C998 272 1110 246 1159 150" fill="none" stroke="#80b5a0" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#96c6a5">
+    <path d="M73 238C23 216 31 187 42 173 73 181 94 204 73 238Z"/>
+    <path d="M105 184C135 181 154 156 149 137 119 139 95 160 105 184Z"/>
+    <path d="M132 116C113 90 122 69 141 62 158 82 154 103 132 116Z"/>
+    <path d="M1080 282C1077 246 1107 229 1127 236 1126 266 1109 282 1080 282Z"/>
+    <path d="M1135 228C1098 218 1092 191 1106 175 1133 183 1148 205 1135 228Z"/>
+  </g>
+  <use href="#flower" transform="translate(76 91) rotate(-12) scale(1.15)"/>
+  <use href="#flower" transform="translate(155 270) rotate(20) scale(.78)"/>
+  <use href="#flower" transform="translate(1116 302) rotate(-18) scale(.9)"/>
+  <use href="#flower" transform="translate(1055 63) rotate(14) scale(.7)"/>
+  <g transform="translate(925 96) rotate(8)">
+    <rect x="-55" y="-42" width="138" height="113" rx="12" fill="#d8cdf0"/>
+    <rect x="-13" y="-48" width="50" height="15" rx="2" fill="#efcea7" opacity=".85"/>
+    <g stroke="#8864b3" stroke-width="2.5" fill="none" stroke-linecap="round">
+      <path d="M-27-12 19-19 58 12 19 42-27 31 19-19M-27-12 19 42M-27 31 58 12"/>
+    </g>
+    <g fill="#fff8ee" stroke="#8864b3" stroke-width="2.5">
+      <circle cx="-27" cy="-12" r="5"/><circle cx="19" cy="-19" r="5"/><circle cx="58" cy="12" r="5"/><circle cx="19" cy="42" r="5"/><circle cx="-27" cy="31" r="5"/>
+    </g>
+  </g>
+  <g transform="translate(288 295) rotate(-7)">
+    <rect x="-76" y="-36" width="155" height="71" rx="12" fill="#c7e8e2"/>
+    <path d="M-57 0H-42L-34-15-24 20-14-23-4 12 6-8 16 0H28L37-17 45 12 55 0H65" fill="none" stroke="#3f938e" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+  </g>
+  <g transform="translate(875 286) rotate(7)">
+    <rect x="-57" y="-27" width="125" height="56" rx="13" fill="#ffe39f"/>
+    <path d="M-23-11-37 0-23 11M30-11 44 0 30 11M12-15 1 15" fill="none" stroke="#ba7650" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+  <use href="#spark" transform="translate(238 65) scale(.8)"/>
+  <use href="#spark" transform="translate(1008 209) scale(.65)"/>
+  <use href="#spark" transform="translate(701 300) scale(.6)"/>
+  <g fill="#eaa6be"><circle cx="200" cy="184" r="4"/><circle cx="778" cy="54" r="4"/><circle cx="1180" cy="87" r="4"/><circle cx="52" cy="330" r="3"/></g>
+  <g fill="#b5a0d1"><circle cx="394" cy="45" r="3"/><circle cx="781" cy="252" r="3"/><circle cx="1149" cy="111" r="3"/></g>
+  <g text-anchor="middle" font-family="'Trebuchet MS', 'DejaVu Sans', Arial, sans-serif">
+    <text x="587" y="145" font-size="76" font-weight="800" fill="url(#ink)">Saonumi</text>
+    <text x="587" y="193" font-size="27" font-weight="700" fill="#594060">Nguyễn Ngọc Sáng</text>
+    <text x="587" y="232" font-size="21" font-weight="600" fill="#856381">AI Researcher / Engineer</text>
+  </g>
+  <path d="M458 252C520 261 641 259 714 249" fill="none" stroke="#e99db8" stroke-width="3" stroke-linecap="round"/>
+</svg>
