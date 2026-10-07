@@ -1,56 +1,78 @@
-import { onMounted, onUnmounted, watchEffect } from "vue";
-import gsap from "gsap";
-import { BASE_VOLUMES, musicTracks, musicPlaybackState } from "../definitions/music";
-import { sizes } from "../../../utils/sizes";
-import { howlerUnlocked, soundsEnabled } from "./useHowler";
+import { onMounted, onUnmounted, watch } from "vue";
+import {
+  musicTracks,
+  musicPlaybackState,
+} from "../definitions/music";
+import { soundsEnabled } from "./useHowler";
 import { isFeatureEnabled } from "../../../utils/features";
-import { useAgent } from "../../../composables/useAgent";
 
-import type { MusicTrack } from "../types";
+let playbackId: number | undefined;
+
+export const startBackgroundMusic = () => {
+  if (!isFeatureEnabled("sounds") || !soundsEnabled.value) return;
+
+  const track = musicTracks.background;
+  if (track.playing() || musicPlaybackState.value === "loading") return;
+
+  musicPlaybackState.value = "loading";
+  playbackId = track.play(playbackId);
+};
 
 export const useMusic = () => {
-  const { isTouch } = useAgent();
+  const track = musicTracks.background;
+  let mounted = false;
 
-  const tickVolumes = () => {
-    musicTracks.background.volume(BASE_VOLUMES.background);
+  const handlePlay = () => {
+    if (!soundsEnabled.value) track.pause();
   };
 
-  const tick = () => {
-    if (!sizes.visible) return;
-    if (!soundsEnabled.value || !howlerUnlocked.value || isTouch.value) return;
-    tickVolumes();
+  const handleInteraction = (event: Event) => {
+    if (!event.isTrusted) return;
+    if (event instanceof KeyboardEvent && event.repeat) return;
+
+    startBackgroundMusic();
   };
 
-  const play = (trackId: MusicTrack) => {
-    if (!isFeatureEnabled("sounds") || isTouch.value) return;
-    const track = musicTracks[trackId];
-    if (!track || track.playing()) return;
-    if (track.state() === 'unloaded') {
-      musicPlaybackState.value = 'loading';
-      track.load();
-    }
-    track.play();
-  };
+  watch(
+    soundsEnabled,
+    (enabled) => {
+      if (!mounted || !isFeatureEnabled("sounds")) return;
 
-  watchEffect(() => {
-    if (!isFeatureEnabled("sounds")) return;
-    if (!soundsEnabled.value) {
-      musicTracks.background.pause();
-      return;
-    }
-    if (!howlerUnlocked.value || !soundsEnabled.value || isTouch.value) return;
-
-    play("background");
-  });
+      if (enabled) {
+        startBackgroundMusic();
+      } else if (track.state() === "loaded") {
+        track.pause();
+      }
+    },
+    { flush: "sync" },
+  );
 
   onMounted(() => {
     if (!isFeatureEnabled("sounds")) return;
-    gsap.ticker.add(tick);
+
+    mounted = true;
+    track.on("play", handlePlay);
+    track.on("unlock", startBackgroundMusic);
+
+    document.addEventListener("click", handleInteraction);
+    document.addEventListener("touchend", handleInteraction);
+    document.addEventListener("keydown", handleInteraction);
+
+    startBackgroundMusic();
   });
 
   onUnmounted(() => {
     if (!isFeatureEnabled("sounds")) return;
-    gsap.ticker.remove(tick);
-    musicTracks.background.stop();
+
+    mounted = false;
+    track.off("play", handlePlay);
+    track.off("unlock", startBackgroundMusic);
+
+    document.removeEventListener("click", handleInteraction);
+    document.removeEventListener("touchend", handleInteraction);
+    document.removeEventListener("keydown", handleInteraction);
+
+    track.stop();
+    playbackId = undefined;
   });
 };
