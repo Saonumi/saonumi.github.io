@@ -1,51 +1,27 @@
 import { onMounted, onUnmounted, ref, watch } from "vue";
 import gsap from "gsap";
-import { lerp } from "../../../utils/math";
 import { Howler } from "howler";
+import { lerp } from "../../../utils/math";
 import { isFeatureEnabled } from "../../../utils/features";
-import { useAgent } from "../../../composables/useAgent";
 
-export const howlerUnlocked = ref(false);
-export const soundsEnabled = ref(false);
+export const soundsEnabled = ref(true);
 
-Howler.volume(0);
+Howler.volume(1);
 
 export const useHowler = () => {
-  const { isTouch } = useAgent();
-  const enabledVolume = ref<number>(0);
+  let targetVolume = 1;
 
-  const handleUnlocked = () => {
-    howlerUnlocked.value = true;
+  const tick = () => {
+    const currentVolume = Howler.volume();
 
-    // Disable sounds completely on touch devices
-    if (isTouch.value) {
-      soundsEnabled.value = false;
+    if (Math.abs(currentVolume - targetVolume) < 0.01) {
+      if (currentVolume !== targetVolume) Howler.volume(targetVolume);
       return;
     }
 
-    const storeItem = localStorage.getItem("portfolio-soundsEnabled");
-    if (storeItem) {
-      soundsEnabled.value = storeItem === "true";
-    } else {
-      soundsEnabled.value = true;
-      localStorage.setItem("portfolio-soundsEnabled", "true");
-    }
-  };
-
-  const tick = () => {
-    if (!howlerUnlocked.value) {
-      if (Howler.ctx.state !== "running") return;
-      handleUnlocked();
-    } else if (!isTouch.value) {
-      // Only process sounds on non-touch devices
-
-      const currentVolume = Howler.volume();
-      if (currentVolume > 0.99 && enabledVolume.value === 1) {
-        return;
-      }
-      const speed = enabledVolume.value === 1 ? 0.01 : 0.05;
-      Howler.volume(lerp(currentVolume, enabledVolume.value, speed));
-    }
+    Howler.volume(
+      lerp(currentVolume, targetVolume, targetVolume ? 0.01 : 0.05),
+    );
   };
 
   const handleVisibilityChange = () => {
@@ -53,35 +29,44 @@ export const useHowler = () => {
   };
 
   const handleKeyPress = (event: KeyboardEvent) => {
-    if (event.code === "KeyM" && !isTouch.value) {
+    const target = event.target;
+    const isTyping =
+      target instanceof HTMLElement &&
+      (target.isContentEditable ||
+        /^(INPUT|TEXTAREA|SELECT)$/.test(target.tagName));
+
+    if (
+      event.code === "KeyM" &&
+      !event.repeat &&
+      !isTyping &&
+      !event.ctrlKey &&
+      !event.altKey &&
+      !event.metaKey
+    ) {
       soundsEnabled.value = !soundsEnabled.value;
     }
   };
 
-  watch(soundsEnabled, (newVal) => {
-    if (!isFeatureEnabled("sounds") || isTouch.value) return;
-    enabledVolume.value = newVal ? 1 : 0;
-    localStorage.setItem("portfolio-soundsEnabled", newVal.toString());
+  watch(soundsEnabled, (enabled) => {
+    targetVolume = enabled ? 1 : 0;
   });
 
   onMounted(() => {
     if (!isFeatureEnabled("sounds")) return;
-    Howler.volume(0);
 
-    if (howlerUnlocked.value) {
-      soundsEnabled.value = localStorage.getItem("portfolio-soundsEnabled") === "true";
-    }
+    Howler.volume(1);
+    handleVisibilityChange();
 
     gsap.ticker.add(tick);
-    window.addEventListener("visibilitychange", handleVisibilityChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
     window.addEventListener("keydown", handleKeyPress);
-
   });
 
   onUnmounted(() => {
     if (!isFeatureEnabled("sounds")) return;
+
     gsap.ticker.remove(tick);
-    window.removeEventListener("visibilitychange", handleVisibilityChange);
+    document.removeEventListener("visibilitychange", handleVisibilityChange);
     window.removeEventListener("keydown", handleKeyPress);
   });
 };
