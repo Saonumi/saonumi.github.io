@@ -97,5 +97,4 @@ Commercial reuse or redistribution of substantial portions of this project witho
 
 <p align="center">
   🌸 🌿 ✨<br />
-  <sub><a href="docs/DEVELOPMENT.md">Tài liệu phát triển & deploy website</a></sub>
 </p>
