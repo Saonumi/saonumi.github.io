@@ -1,34 +1,49 @@
 <script setup lang="ts">
-import { soundsEnabled, howlerUnlocked } from "../features/sounds/composables/useHowler";
+import { soundsEnabled } from "../features/sounds/composables/useHowler";
+import { startBackgroundMusic } from "../features/sounds/composables/useMusic";
+import { musicPlaybackState } from "../features/sounds/definitions/music";
 import ButtonRound from "./ButtonRound.vue";
 import Volume from "./icons/Volume.vue";
 import { t } from "../i18n/utils/translate";
-import { useAgent } from "../composables/useAgent";
-import { musicPlaybackState } from "../features/sounds/definitions/music";
-
-const { isTouch } = useAgent();
 
 const props = defineProps<{
   isDarkTheme: boolean;
 }>();
 
 const toggleSounds = () => {
-  soundsEnabled.value = !soundsEnabled.value;
+  if (
+    soundsEnabled.value &&
+    (musicPlaybackState.value === "playing" ||
+      musicPlaybackState.value === "loading")
+  ) {
+    soundsEnabled.value = false;
+  } else {
+    soundsEnabled.value = true;
+    startBackgroundMusic();
+  }
 };
 </script>
 
 <template>
   <ButtonRound
-    v-if="!isTouch"
     variant="theme"
-    :class="{ 'music-toggle': true, 'music-toggle-dark': props.isDarkTheme, 'children-unclickable': true }"
+    :class="{
+      'music-toggle': true,
+      'music-toggle-dark': props.isDarkTheme,
+      'children-unclickable': true,
+    }"
     @click="toggleSounds"
-    :aria-label="soundsEnabled && howlerUnlocked ? t('disable-sounds') : t('enable-sounds')"
+    :aria-label="
+      soundsEnabled && musicPlaybackState === 'playing'
+        ? t('disable-sounds')
+        : t('enable-sounds')
+    "
+    :aria-pressed="soundsEnabled && musicPlaybackState === 'playing'"
     :data-music-state="musicPlaybackState"
     data-music-source="nhacnen.mp3"
     data-cursor="circle-white"
   >
-    <Volume :active="soundsEnabled && howlerUnlocked" />
+    <Volume :active="soundsEnabled && musicPlaybackState === 'playing'" />
   </ButtonRound>
 </template>
 
